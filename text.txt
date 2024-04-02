@@ -1,0 +1,17 @@
+curl -X POST http://127.0.0.1:5000/tasks -H 'Content-Type: application/json'  -d '{"title":"buy","details":"chocolate"}'
+curl -X PUT http://127.0.0.1:5000/tasks/3 -H 'Content-Type: application/json'  -d '{"title":"buy","details":"boots"}'
+curl -X DELETE http://127.0.0.1:5000/tasks/3 
+
+
+{
+    "tasks": []
+}
+
+#delete task
+@app.route('/tasks>', methods=['DELETe'])
+def delete_task(task_id):
+    
+     if tasks_db.delete_task(request.json['task_id']) == 'TaskNotFound':
+         return json({'error': 'TaskNotFound'}),404
+     
+     return json.dumps(tasks_db.get_all_tasks()),201
